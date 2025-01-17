@@ -1,95 +1,205 @@
-Home Page: A welcoming page showcasing featured products and categories with a sleek and responsive design.
-Shop Page: A dedicated section to explore and filter products by categories and preferences.
-Cart Page: Manage items added to the cart with real-time updates and quantity adjustments.
-Order Tracking Page: Track the status and progress of ongoing orders with live updates.
-Track Order Page: Users can input their order ID to find specific details about their order.
-Checkout Page: A secure and smooth checkout process integrated with Stripe for payment.
-Thank You Page: A confirmation page to thank users after successful order placement.
 
+# MARKETPLACE TECHNICAL FOUNDATION
+# MARKETPLACE: General E-Commerce
+# BRAND: Furnico
 
+## Day 1: Business Focus Vision
 
+### Establishing a Strong Business Foundation
 
+Furnico aims to revolutionize furniture shopping with:
+- **Personalized shopping**
+- **Community-driven features**
+- **Sustainable products**
 
-Frontend
-Next.js: For building server-rendered, dynamic UIs.
-Tailwind CSS: For responsive and beautiful designs.
-Shadcn/UI: For customizable UI components.
-Backend
-Sanity CMS: To manage and structure content effectively.
-Clerk: For user authentication and management.
-APIs
-ShipEngine API: For shipment tracking and delivery management.
-Stripe API: For secure and seamless payment processing.
-Tools
-GitHub: For version control and collaboration.
-Postman: To test and document APIs.
-Vercel: For fast and reliable deployment.
+### Key Features
+- **AI-driven interior design assistance**
+- **AR visualization for real-time furniture fitting**
+- **Eco-friendly furniture options**
+- **Subscription model for exclusive access**
+- **Gamified shopping experience**
 
+### Target Audience
+- **Young professionals**
+- **Families**
+- **Small businesses**
+- Addressing the pain point of visualizing and purchasing furniture online.
 
-Schemas
-We're using Sanity CMS, so our schemas are pretty straightforward. Here's a sneak peek at our product schema:
+---
 
-Product
-Field	Type	Description
-id	String	Unique identifier for the product.
-name	String	Name of the product.
-price	Number	Current selling price.
-stock	Number	Quantity available in stock.
-description	String	Detailed description of the product.
-images	Array[String]	List of image URLs for the product.
-category	Reference	Associated category of the product.
-createdAt	Date	Product creation date.
-slug	String	URL-friendly identifier for the product.
-rating	Number	Average customer rating.
-originalPrice	Number	Original price before any discounts.
-colors	Array[String]	Available colors for the product.
-sizes	Array[String]	Available sizes for the product.
-tags	Array[String]	Searchable tags associated with the product.
-isNewArrival	Boolean	Flag indicating if the product is a new arrival.
-isTopSelling	Boolean	Flag indicating if the product is a top-seller.
-productDetails	Object	Additional details about the product.
-faqs	Array[Object]	Frequently asked questions about the product.
-Customer
-Field	Type	Description
-customerId	String	Unique identifier for the customer.
-name	String	Customer's full name.
-email	String	Email address of the customer.
-phone	String	Contact phone number.
-address	String	Residential address.
-city	String	City of residence.
-state	String	State of residence.
-zipCode	String	ZIP or postal code.
-Order
-Field	Type	Description
-orderId	String	Unique identifier for the order.
-customer	Reference	Customer who placed the order.
-items	Array[Object]	List of items in the order.
-totalAmount	Number	Total cost of the order.
-status	String	Current order status.
-shipping	Object	Shipping details.
-createdAt	Date	Order creation date.
-updatedAt	Date	Last update date for the order.
-Shipment
-Field	Type	Description
-shipmentId	String	Unique identifier for the shipment.
-order	Reference	Associated order.
-carrier	String	Shipping carrier name.
-status	String	Current status of the shipment.
-trackingId	String	Tracking ID for the shipment.
-estimatedDeliveryDate	Date	Expected delivery date.
-actualDeliveryDate	Date	Actual delivery date.
-shippingLabel	String	URL of the shipping label.
-createdAt	Date	Shipment creation date.
-updatedAt	Date	Last update date for the shipment.
-Category
-Field	Type	Description
-name	String	Name of the category.
-slug	String	URL-friendly identifier.
-Coupon
-Field	Type	Description
-code	String	Unique coupon code.
-discountType	String	Type of discount (e.g., percentage, flat).
-discountValue	Number	Value of the discount.
-minPurchase	Number	Minimum purchase amount required.
-expiryDate	Date	Expiration date of the coupon.
-isActive	Boolean	Indicates if the coupon is active.
+## Day 2: Transitioning to Technical Planning
+
+### Frontend Development Requirements
+- **Technology Stack**:
+  - **Next.js**: Fast, SEO-optimized pages.
+  - **React**: Reusable components and UI rendering.
+  - **TailwindCSS**: Responsive, visually appealing design.
+  - **AR Integration**: React-Three/Fiber for 3D interactive models.
+
+### Backend Development Requirements
+- **Sanity CMS**: Content management and dynamic updates.
+- **Schema Development**:
+  - Custom schemas for products, customers, orders, and shipments.
+- **Database Design**:
+  - Scalable structure to store product and customer data.
+- **Third-Party Integrations**:
+  - Payment APIs: Stripe, PayPal
+  - Shipment Tracking: ShipEngine, AfterShip
+  - AI Recommendations: TensorFlow, Algolia
+
+---
+
+## System Architecture Overview
+
+![Firnico System Architecture](/Documentation/images/image1.png "System Architecture")
+
+### Components
+- **Frontend (Next.js)**: Interacts with Sanity CMS to fetch and display product data.
+- **Sanity CMS**: Handles dynamic content, managing product data, customer orders, and real-time updates.
+- **Third-Party APIs**:
+  - Stripe for payment
+  - ShipEngine for delivery tracking
+
+```
++-------------------+    +------------------+    +----------------------+  
+| Frontend (Next.js)|<-->|     Sanity CMS   |<-->|  Third-Party APIs    |  
+| (UI/UX & Pages)   |    | (Product Data,   |    | (Payment Gateway,    |  
+|                   |    | Customer Details,|    | Shipment Tracking)   |  
+|                   |    | Orders Mgmt.)    |    |                      |  
++-------------------+    +------------------+    +----------------------+  
+        |                       |                       |                   
+        V                       V                       V                   
++------------------+   +----------------------+    +-------------------+   
+| AR Visualization |   | Payment Gateway API |    | Shipment Tracking |   
+| (Interactive 3D) |   |    (Stripe, PayPal)  |    |   (ShipEngine)    |   
++------------------+   +----------------------+    +-------------------+   
+        |                                                                    
+        V                                                                    
++------------------------+                                                   
+| AI Product Recommender |                                                   
+|   (Algolia/TensorFlow) |                                                   
++------------------------+                                                   
+```
+
+---
+ ![FURNICO System Architecture](/Documentation/images/image1.png "System Architecture")
+## API Requirements & Endpoints
+
+### Product API
+- **GET /products**: Fetch all products.
+- **GET /products/{id}**: Fetch product details.
+- **POST /products**: Add a new product.
+- **PUT /products/{id}**: Update product details.
+- **DELETE /products/{id}**: Delete a product.
+
+### Customer API
+- **POST /customers**: Register a new customer.
+- **GET /customers/{id}**: Get customer details.
+- **PATCH /customers/{id}**: Update customer information.
+
+### Order API
+- **POST /orders**: Place a new order.
+- **GET /orders/{id}**: Retrieve order details.
+- **PUT /orders/{id}**: Update order status.
+- **DELETE /orders/{id}**: Cancel an order.
+
+### Shipment API
+- **GET /shipment/{orderId}**: Retrieve shipment tracking information.
+- **POST /shipment**: Create a new shipment.
+
+### Payment API
+- **POST /payment**: Initiate payment via Stripe/PayPal.
+
+### AI/Recommendation API
+- **GET /recommendations**: Fetch personalized product recommendations.
+
+---
+![FurniCO System Architecture](/Documentation/images/image1.png "System Architecture")
+## Authentication & Authorization
+
+### Authentication
+- **Clerk** for OAuth 2.0 (Google, Facebook) or JWT sessions.
+
+### Authorization
+- **Role-Based Access Control (RBAC)**:
+  - **Admin Role**: Full access.
+  - **Customer Role**: Browse products, place orders, view history.
+  - **Guest Role**: Limited access to browse products.
+
+### Validation
+- Use **Joi** or **Yup** for schema validation.
+
+---
+
+## Brief Schema Definitions
+
+### Product Schema
+```json
+{
+  "name": "String",
+  "description": "String",
+  "price": "Number",
+  "stock": "Number",
+  "image_url": "URL",
+  "category": "String",
+  "isFeatured": "Boolean"
+}
+```
+
+### Order Schema
+```json
+{
+  "customer_id": "String",
+  "products": "Array",
+  "total_price": "Number",
+  "shipping_address": "String",
+  "order_status": { "type": "String", "enum": ["Pending", "Shipped", "Delivered"] },
+  "created_at": "Date"
+}
+```
+
+### Customer Schema
+```json
+{
+  "name": "String",
+  "email": "String",
+  "password": "String",
+  "shipping_address": "String",
+  "order_history": "Array"
+}
+```
+
+### AI Recommendations Schema
+```json
+{
+  "customer_id": "String",
+  "recommended_products": "Array"
+}
+```
+
+---
+
+## Security Best Practices
+
+- **Rate Limiting & CAPTCHA**: Prevent brute force attacks.
+- **Data Encryption**: Encrypt sensitive customer data.
+- **Two-Factor Authentication (2FA)**: Add extra security for users and admins.
+
+---
+
+## Testing and Documentation
+
+- **API Testing**: Use Postman to test endpoints.
+- **Frontend Testing**: Ensure proper rendering, especially for AR features.
+- **Integration Testing**: Test frontend-backend interaction.
+- **Real-Time Data Testing**: Verify Sanity CMS updates reflect on the frontend.
+
+---
+
+## Closing Statement
+
+By defining clear API requirements, schemas, and system architecture, we are building a scalable, efficient platform for FurniSphere. This platform aims to blend cutting-edge technologies with real-world needs, creating a seamless, personalized furniture shopping experience. Each feature, from AR fitting to AI recommendations, reflects our commitment to innovation and customer satisfaction.
+
+Let’s make Furnico a game-changer in the furniture industry!
+
+## Build by:  "Abdul Samad" (Student leader at GIAIC)
