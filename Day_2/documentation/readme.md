@@ -223,7 +223,7 @@ Furnico aims to revolutionize furniture shopping with:
 
 ## Closing Statement
 
-By defining clear API requirements, schemas, and system architecture, we are building a scalable, efficient platform for FurniSphere. This platform aims to blend cutting-edge technologies with real-world needs, creating a seamless, personalized furniture shopping experience. Each feature, from AR fitting to AI recommendations, reflects our commitment to innovation and customer satisfaction.
+By defining clear API requirements, schemas, and system architecture, we are building a scalable, efficient platform for FurniCo. This platform aims to blend cutting-edge technologies with real-world needs, creating a seamless, personalized furniture shopping experience. Each feature, from AR fitting to AI recommendations, reflects our commitment to innovation and customer satisfaction.
 
 Let’s make Furnico a game-changer in the furniture industry!
 
